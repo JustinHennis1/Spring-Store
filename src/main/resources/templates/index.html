@@ -1,0 +1,84 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: html(
+          ~{::title},
+          ~{::link},
+          ~{::#content},
+          ~{::script}
+      )}">
+<head>
+    <title>Home Page | My Website</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+<div id="content">
+    <div class="jumbotron bg-light p-5 rounded">
+        <h1 class="display-4">Welcome to My Website</h1>
+        <p class="lead">This is an example of template inheritance with Thymeleaf.</p>
+        <hr class="my-4">
+        <p>Using a base layout for consistent design across all pages.</p>
+        <a class="btn btn-primary btn-lg" href="#" th:href="@{/about}" role="button">Learn more</a>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4" th:each="product : ${products}">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.title}">Product Title</h5>
+                    <p class="card-text" th:text="${product.description}">Product description goes here.</p>
+                    <p class="text-primary fw-bold" th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2)}">$0.00</p>
+                    <a href="#" th:href="@{/products/{id}(id=${product.productId})}" class="btn btn-sm btn-outline-primary">View Details</a>
+                    <button class="btn btn-sm btn-outline-secondary edit-product-btn"
+                            th:data-id="${product.productId}"
+                            th:data-title="${product.title}"
+                            th:data-description="${product.description}"
+                            th:data-price="${product.price}">
+                        Edit
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="editProductForm" th:action="@{/products/update}" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="productId" id="modalProductId">
+                        <div class="mb-3">
+                            <label for="modalTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" name="title" id="modalTitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalDescription" class="form-label">Description</label>
+                            <textarea class="form-control" name="description" id="modalDescription"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalPrice" class="form-label">Price</label>
+                            <input type="number" step="0.01" class="form-control" name="price" id="modalPrice">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script th:src="@{/js/home.js?v=1.2}"></script>
+</body>
+</html>

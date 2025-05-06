@@ -1,0 +1,32 @@
+<!--contact.html-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{base :: html(
+        ~{::title},
+        ~{::link},
+        ~{::#content},
+        ~{::script}
+        )}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Page</title>
+    <link rel="stylesheet" th:href="@{css/contact.css}">
+</head>
+<body>
+    <div id="content">
+        <div class="jumbotron bg-dark p-5 rounded">
+            <h1 class="display-4 text-light">Contact Us</h1>
+            <p class="lead text-light"> You can contact us a number of ways including linkedin, facebook, and email</p>
+            <hr class="my-4">
+            <div class="btn-group">
+                <a class="btn btn-secondary" th:href="@{/}">Linkedin</a>
+                <a class="btn btn-secondary" th:href="@{/}">Facebook</a>
+                <a class="btn btn-secondary" th:href="@{/}">Email</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script></script>
+</html>

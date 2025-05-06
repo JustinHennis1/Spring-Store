@@ -1,0 +1,49 @@
+<!--product-details.html-->
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+    th:replace="~{base :: html(
+    ~{::title},
+    ~{::link},
+    ~{::#content},
+    ~{::script}
+)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Details</title>
+    <link rel="stylesheet" th:href="@{css/product_details.css}">
+</head>
+<body>
+    <div id="content">
+
+        <div class="jumbotron bg-dark text-light rounded">
+            <div class="row">
+                <div class="col-sm-6 p-5">
+                    <h1 th:text="${product.title}">Title of Product</h1>
+                    <hr>
+                    <div class="row justify-content-between">
+                        <div class="col-auto"><p>ID:</p></div>
+                        <div class="col-auto"><p><i>#<span th:text="${product.productId}">ID of Product</span></i></p></div>
+                    </div>
+
+                    <div class="row justify-content-between">
+                        <div class="col-auto"><p>Description:</p></div>
+                        <div class="col-auto"><p th:text="${product.description}">Description of Product</p></div>
+                    </div>
+
+                    <div class="row justify-content-between">
+                        <div class="col-auto"><p>Price:</p></div>
+                        <div class="col-auto"><p>$<strong th:text="${product.price}">Price of Product</strong></p></div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+    </div>
+
+<script></script>
+</body>
+</html>
